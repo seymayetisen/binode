@@ -29,11 +29,11 @@ namespace Binode.Presentation.WinForm
             KategoriyiTreeviewAEkle(kategoriler, null);
         }
 
-        private void KategoriyiTreeviewAEkle(List<Kategori> kategoriler, TreeNode node)
+        public void KategoriyiTreeviewAEkle(List<Kategori> kategoriler, TreeNode node)
         {
             foreach (var kategori in kategoriler)
             {
-                if(node is null)
+                if(node == null)
                 {
                     var nnode = new TreeNode(kategori.Isim);
                     nnode.ContextMenuStrip = contextMenuStrip1;
@@ -63,11 +63,11 @@ namespace Binode.Presentation.WinForm
         private void treeKategori_AfterSelect(object sender, TreeViewEventArgs e)
         {
             listView1.Items.Clear();
-
+            //MessageBox.Show(e.Node);
             ListViewDoldur(e.Node);
         }
 
-        private void ListViewDoldur(TreeNode node)
+        public void ListViewDoldur(TreeNode node)
         {
             var kategori = node.Tag as Kategori;
 
@@ -98,6 +98,31 @@ namespace Binode.Presentation.WinForm
                     ListViewDoldur(subNode);
                 }
             }
+        }
+
+        private void metinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            //this.Hide();
+            f2.Show();
+            TreeNode treeN = treeKategori.SelectedNode;
+            TreeNode t = treeKategori.SelectedNode;
+
+        }
+
+        private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

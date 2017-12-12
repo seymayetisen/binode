@@ -30,20 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             this.grpKategori = new System.Windows.Forms.GroupBox();
-            this.grpIcerik = new System.Windows.Forms.GroupBox();
             this.treeKategori = new System.Windows.Forms.TreeView();
+            this.grpIcerik = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.metinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.grpKategori.SuspendLayout();
             this.grpIcerik.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -59,6 +59,14 @@
             this.grpKategori.TabStop = false;
             this.grpKategori.Text = "Kategori";
             // 
+            // treeKategori
+            // 
+            this.treeKategori.Location = new System.Drawing.Point(6, 19);
+            this.treeKategori.Name = "treeKategori";
+            this.treeKategori.Size = new System.Drawing.Size(188, 405);
+            this.treeKategori.TabIndex = 0;
+            this.treeKategori.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeKategori_AfterSelect);
+            // 
             // grpIcerik
             // 
             this.grpIcerik.Controls.Add(this.listView1);
@@ -68,14 +76,6 @@
             this.grpIcerik.TabIndex = 1;
             this.grpIcerik.TabStop = false;
             this.grpIcerik.Text = "İçerik";
-            // 
-            // treeKategori
-            // 
-            this.treeKategori.Location = new System.Drawing.Point(6, 19);
-            this.treeKategori.Name = "treeKategori";
-            this.treeKategori.Size = new System.Drawing.Size(188, 405);
-            this.treeKategori.TabIndex = 0;
-            this.treeKategori.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeKategori_AfterSelect);
             // 
             // listView1
             // 
@@ -120,12 +120,6 @@
             this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem2.Text = "Alt Kategori Ekle...";
             // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(169, 22);
-            this.toolStripMenuItem3.Text = "Sil";
-            // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -142,24 +136,34 @@
             this.metinToolStripMenuItem.Name = "metinToolStripMenuItem";
             this.metinToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.metinToolStripMenuItem.Text = "Metin";
+            this.metinToolStripMenuItem.Click += new System.EventHandler(this.metinToolStripMenuItem_Click);
             // 
             // pdfToolStripMenuItem
             // 
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pdfToolStripMenuItem.Text = "Pdf";
+            this.pdfToolStripMenuItem.Click += new System.EventHandler(this.pdfToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
             this.videoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.videoToolStripMenuItem.Text = "Video";
+            this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
             // 
             // sesToolStripMenuItem
             // 
             this.sesToolStripMenuItem.Name = "sesToolStripMenuItem";
             this.sesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sesToolStripMenuItem.Text = "Ses";
+            this.sesToolStripMenuItem.Click += new System.EventHandler(this.sesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(169, 22);
+            this.toolStripMenuItem3.Text = "Sil";
             // 
             // Form1
             // 
@@ -181,7 +185,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpKategori;
-        private System.Windows.Forms.TreeView treeKategori;
         private System.Windows.Forms.GroupBox grpIcerik;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -195,6 +198,7 @@
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sesToolStripMenuItem;
+        public System.Windows.Forms.TreeView treeKategori;
     }
 }
 
