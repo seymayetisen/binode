@@ -90,6 +90,7 @@ namespace Binode.Presentation.WinForm
             {
                 var li = new ListViewItem(new[] { icerik.Isim, kategori.Isim });
                 li.Group = group;
+                li.Tag = icerik;
                 li.ImageKey = icerik.Tip.ToString().ToLower();
                 listView1.Items.Add(li);
             }
@@ -167,7 +168,12 @@ namespace Binode.Presentation.WinForm
 
         private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "PDF | *.pdf";
+            AddFileContent("PDF | *.pdf", IcerikTipi.Pdf);
+        }
+
+        private void AddFileContent(string filter, IcerikTipi tip)
+        {
+            openFileDialog1.Filter = filter;
             openFileDialog1.ShowDialog();
 
             var category = _rightClicknode.Tag as Kategori;
@@ -176,7 +182,7 @@ namespace Binode.Presentation.WinForm
             {
                 Isim = openFileDialog1.SafeFileName,
                 Content = openFileDialog1.FileName,
-                Tip = IcerikTipi.Pdf,
+                Tip = tip,
                 EklenmeTarihi = DateTime.Now,
                 Kategori = category
             };
@@ -186,46 +192,48 @@ namespace Binode.Presentation.WinForm
             RefreshListView();
         }
 
-        private void sesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "MP3 | *.mp3";
-            openFileDialog1.ShowDialog();
+            var listView = sender as ListView;
+            var content = listView.SelectedItems[0].Tag as Icerik;
 
-            var category = _rightClicknode.Tag as Kategori;
-
-            var content = new Icerik
+            switch (content.Tip)
             {
-                Isim = openFileDialog1.SafeFileName,
-                Content = openFileDialog1.FileName,
-                Tip = IcerikTipi.Ses,
-                EklenmeTarihi = DateTime.Now,
-                Kategori = category
-            };
+                case IcerikTipi.Metin:
+                    ShowTextContentViewForm(content);
+                    break;
+                case IcerikTipi.Pdf:
+                    break;
+                case IcerikTipi.Ses:
+                    break;
+                case IcerikTipi.Video:ShowVideoContentPlayerForm();
+                    break;
+                default:
+                    break;
+            }
+        }
 
-            category.Icerik.Add(content);
+        private void ShowTextContentViewForm(Icerik content)
+        {
+            var textContentViewverForm = new TextContentViewForm();
+            textContentViewverForm.Icerik = content;
+            textContentViewverForm.ShowDialog();
+        }
 
-            RefreshListView();
+        private void ShowVideoContentPlayerForm()
+        {
+            var videoContentPlayerForm = new VideoContentPlayerForm();
+            videoContentPlayerForm.ShowDialog();
         }
 
         private void videoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "MP4 | *.mp4";
-            openFileDialog1.ShowDialog();
+            AddFileContent("MP4 | *.mp4", IcerikTipi.Video);
+        }
 
-            var category = _rightClicknode.Tag as Kategori;
-
-            var content = new Icerik
-            {
-                Isim = openFileDialog1.SafeFileName,
-                Content = openFileDialog1.FileName,
-                Tip = IcerikTipi.Video,
-                EklenmeTarihi = DateTime.Now,
-                Kategori = category
-            };
-
-            category.Icerik.Add(content);
-
-            RefreshListView();
+        private void sesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddFileContent("WAV | *.wav", IcerikTipi.Ses);
         }
     }
 }
