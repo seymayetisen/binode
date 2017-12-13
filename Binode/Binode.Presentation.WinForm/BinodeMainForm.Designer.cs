@@ -46,6 +46,7 @@ namespace Binode.Presentation.WinForm
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grpKategori.SuspendLayout();
             this.grpIcerik.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -150,12 +151,14 @@ namespace Binode.Presentation.WinForm
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pdfToolStripMenuItem.Text = "Pdf";
+            this.pdfToolStripMenuItem.Click += new System.EventHandler(this.pdfToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
             this.videoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.videoToolStripMenuItem.Text = "Video";
+            this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
             // 
             // sesToolStripMenuItem
             // 
@@ -169,14 +172,18 @@ namespace Binode.Presentation.WinForm
             this.toolStripMenuItem3.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem3.Text = "Sil";
             // 
-            // BinodeMain
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // BinodeMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 454);
             this.Controls.Add(this.grpIcerik);
             this.Controls.Add(this.grpKategori);
-            this.Name = "BinodeMain";
+            this.Name = "BinodeMainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grpKategori.ResumeLayout(false);
@@ -191,9 +198,7 @@ namespace Binode.Presentation.WinForm
         #endregion
 
         private System.Windows.Forms.GroupBox grpKategori;
-        private System.Windows.Forms.TreeView treeKategori;
         private System.Windows.Forms.GroupBox grpIcerik;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -205,6 +210,9 @@ namespace Binode.Presentation.WinForm
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sesToolStripMenuItem;
+        public System.Windows.Forms.TreeView treeKategori;
+        public System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

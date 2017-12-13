@@ -15,7 +15,7 @@ namespace Binode.Presentation.WinForm
 {
     public partial class BinodeMainForm : Form
     {
-        private TreeNode _rightClicknode;
+        public TreeNode _rightClicknode;
 
         public BinodeMainForm()
         {
@@ -71,7 +71,7 @@ namespace Binode.Presentation.WinForm
             ListViewDoldur(e.Node);
         }
 
-        private void ListViewDoldur(TreeNode node)
+        public void ListViewDoldur(TreeNode node)
         {
             var kategori = node.Tag as Kategori;
 
@@ -153,8 +153,23 @@ namespace Binode.Presentation.WinForm
 
         private void metinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var textContentForm = new AddTextContentForm();
+            AddTextContentForm textContentForm = new AddTextContentForm();
             textContentForm.ShowDialog();
+            
+        }
+
+        private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "PDF | *.pdf";
+            openFileDialog1.ShowDialog();
+            Icerik content = new Icerik {
+
+            };
+        }
+
+        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
