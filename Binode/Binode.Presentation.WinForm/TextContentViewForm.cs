@@ -27,5 +27,10 @@ namespace Binode.Presentation.WinForm
             label1.Text = Icerik.Isim;
             richTextBox1.Rtf = Icerik.Content;
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

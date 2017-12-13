@@ -49,6 +49,8 @@ namespace Binode.Presentation.WinForm
             this.sesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.rdbtnKategori = new System.Windows.Forms.RadioButton();
+            this.rdbtnTür = new System.Windows.Forms.RadioButton();
             this.grpKategori.SuspendLayout();
             this.grpIcerik.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -57,9 +59,9 @@ namespace Binode.Presentation.WinForm
             // grpKategori
             // 
             this.grpKategori.Controls.Add(this.treeKategori);
-            this.grpKategori.Location = new System.Drawing.Point(12, 12);
+            this.grpKategori.Location = new System.Drawing.Point(12, 31);
             this.grpKategori.Name = "grpKategori";
-            this.grpKategori.Size = new System.Drawing.Size(200, 430);
+            this.grpKategori.Size = new System.Drawing.Size(200, 411);
             this.grpKategori.TabIndex = 0;
             this.grpKategori.TabStop = false;
             this.grpKategori.Text = "Kategori";
@@ -78,9 +80,9 @@ namespace Binode.Presentation.WinForm
             // grpIcerik
             // 
             this.grpIcerik.Controls.Add(this.listView1);
-            this.grpIcerik.Location = new System.Drawing.Point(218, 12);
+            this.grpIcerik.Location = new System.Drawing.Point(218, 31);
             this.grpIcerik.Name = "grpIcerik";
-            this.grpIcerik.Size = new System.Drawing.Size(566, 430);
+            this.grpIcerik.Size = new System.Drawing.Size(566, 411);
             this.grpIcerik.TabIndex = 1;
             this.grpIcerik.TabStop = false;
             this.grpIcerik.Text = "İçerik";
@@ -124,7 +126,7 @@ namespace Binode.Presentation.WinForm
             this.toolStripMenuItem4,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 92);
             this.contextMenuStrip1.Text = "Yeniden Adlandır";
             // 
             // toolStripMenuItem1
@@ -155,28 +157,28 @@ namespace Binode.Presentation.WinForm
             // metinToolStripMenuItem
             // 
             this.metinToolStripMenuItem.Name = "metinToolStripMenuItem";
-            this.metinToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.metinToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.metinToolStripMenuItem.Text = "Metin";
             this.metinToolStripMenuItem.Click += new System.EventHandler(this.metinToolStripMenuItem_Click);
             // 
             // pdfToolStripMenuItem
             // 
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
-            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.pdfToolStripMenuItem.Text = "Pdf";
             this.pdfToolStripMenuItem.Click += new System.EventHandler(this.pdfToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
-            this.videoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.videoToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.videoToolStripMenuItem.Text = "Video";
             this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
             // 
             // sesToolStripMenuItem
             // 
             this.sesToolStripMenuItem.Name = "sesToolStripMenuItem";
-            this.sesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sesToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.sesToolStripMenuItem.Text = "Ses";
             this.sesToolStripMenuItem.Click += new System.EventHandler(this.sesToolStripMenuItem_Click);
             // 
@@ -190,11 +192,38 @@ namespace Binode.Presentation.WinForm
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // rdbtnKategori
+            // 
+            this.rdbtnKategori.AutoSize = true;
+            this.rdbtnKategori.Location = new System.Drawing.Point(585, 8);
+            this.rdbtnKategori.Name = "rdbtnKategori";
+            this.rdbtnKategori.Size = new System.Drawing.Size(98, 17);
+            this.rdbtnKategori.TabIndex = 2;
+            this.rdbtnKategori.TabStop = true;
+            this.rdbtnKategori.Text = "kategoriye göre";
+            this.rdbtnKategori.UseVisualStyleBackColor = true;
+            this.rdbtnKategori.CheckedChanged += new System.EventHandler(this.rdbtnKategori_CheckedChanged);
+            // 
+            // rdbtnTür
+            // 
+            this.rdbtnTür.AutoSize = true;
+            this.rdbtnTür.Checked = true;
+            this.rdbtnTür.Location = new System.Drawing.Point(693, 8);
+            this.rdbtnTür.Name = "rdbtnTür";
+            this.rdbtnTür.Size = new System.Drawing.Size(67, 17);
+            this.rdbtnTür.TabIndex = 3;
+            this.rdbtnTür.TabStop = true;
+            this.rdbtnTür.Text = "türe göre";
+            this.rdbtnTür.UseVisualStyleBackColor = true;
+            this.rdbtnTür.CheckedChanged += new System.EventHandler(this.rdbtnTür_CheckedChanged);
+            // 
             // BinodeMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 454);
+            this.Controls.Add(this.rdbtnTür);
+            this.Controls.Add(this.rdbtnKategori);
             this.Controls.Add(this.grpIcerik);
             this.Controls.Add(this.grpKategori);
             this.Name = "BinodeMainForm";
@@ -204,6 +233,7 @@ namespace Binode.Presentation.WinForm
             this.grpIcerik.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -228,6 +258,8 @@ namespace Binode.Presentation.WinForm
         private System.Windows.Forms.ToolStripMenuItem sesToolStripMenuItem;
         private System.Windows.Forms.ImageList imglContentSmallIcons;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.RadioButton rdbtnKategori;
+        private System.Windows.Forms.RadioButton rdbtnTür;
     }
 }
 

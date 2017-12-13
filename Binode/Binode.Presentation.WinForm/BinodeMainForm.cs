@@ -73,38 +73,97 @@ namespace Binode.Presentation.WinForm
 
         private void ListViewDoldur(TreeNode node)
         {
-            var kategori = node.Tag as Kategori;
 
-            //Hatalı olabilir
-            if (kategori?.Icerik?.Count == null)
+            if (rdbtnKategori.Checked)
             {
-                return;
-            }
+                var kategori = node.Tag as Kategori;
 
-            var group = new ListViewGroup();
-            group.Name = kategori.Isim;
-            group.Header = kategori.Isim;
-
-            listView1.Groups.Add(group);
-            foreach (var icerik in kategori.Icerik)
-            {
-                var li = new ListViewItem(new[] { icerik.Isim, kategori.Isim });
-                li.Group = group;
-                li.Tag = icerik;
-                li.ImageKey = icerik.Tip.ToString().ToLower();
-                listView1.Items.Add(li);
-            }
-
-            //listView1.Groups.Add(group);
-
-            if (node.Nodes != null)
-            {
-                foreach (TreeNode subNode in node.Nodes)
+                //Hatalı olabilir
+                if (kategori?.Icerik?.Count == null)
                 {
-                    ListViewDoldur(subNode);
+                    return;
+                }
+
+                var group = new ListViewGroup();
+                group.Name = kategori.Isim;
+                group.Header = kategori.Isim;
+
+                listView1.Groups.Add(group);
+                foreach (var icerik in kategori.Icerik)
+                {
+                    var li = new ListViewItem(new[] { icerik.Isim, kategori.Isim });
+                    li.Group = group;
+                    li.Tag = icerik;
+                    li.ImageKey = icerik.Tip.ToString().ToLower();
+                    listView1.Items.Add(li);
+                }
+
+                //listView1.Groups.Add(group);
+
+                if (node.Nodes != null)
+                {
+                    foreach (TreeNode subNode in node.Nodes)
+                    {
+                        ListViewDoldur(subNode);
+                    }
                 }
             }
+            else
+            {
+                var group = new ListViewGroup();
+                group.Name = "Metin";
+                group.Header = "Metin";
+                listView1.Groups.Add(group);
+                var group2 = new ListViewGroup();
+                group2.Name = "Video";
+                group2.Header = "Video";
+                listView1.Groups.Add(group2);
+                
+                var kategori = node.Tag as Kategori;
+                
+                //Hatalı olabilir
+                if (kategori?.Icerik?.Count == null)
+                {
+                    return;
+                }
+
+                
+                foreach (var icerik in kategori.Icerik)
+                {
+                  
+
+                    for (int i = 0; i < listView1.Groups.Count; i++)
+                    {
+                       
+                        if (icerik.Tip.ToString()==listView1.Groups[i].Name)
+                        {
+                            var li = new ListViewItem(new[] { icerik.Isim, kategori.Isim });
+                            li.Group = listView1.Groups[i];
+                            li.Tag = icerik;
+                            li.ImageKey = icerik.Tip.ToString().ToLower();
+                            listView1.Items.Add(li);
+                           
+                        }
+                        
+
+                    }
+                    
+                    
+                }
+
+                //listView1.Groups.Add(group);
+
+                if (node.Nodes != null)
+                {
+                    foreach (TreeNode subNode in node.Nodes)
+                    {
+                        ListViewDoldur(subNode);
+                    }
+                }
+            }
+            
         }
+        
 
         private void treeKategori_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -206,7 +265,7 @@ namespace Binode.Presentation.WinForm
                     break;
                 case IcerikTipi.Ses:
                     break;
-                case IcerikTipi.Video:ShowVideoContentPlayerForm();
+                case IcerikTipi.Video:ShowVideoContentPlayerForm(content);
                     break;
                 default:
                     break;
@@ -220,9 +279,10 @@ namespace Binode.Presentation.WinForm
             textContentViewverForm.ShowDialog();
         }
 
-        private void ShowVideoContentPlayerForm()
+        private void ShowVideoContentPlayerForm(Icerik content)
         {
             var videoContentPlayerForm = new VideoContentPlayerForm();
+            videoContentPlayerForm.axWindowsMediaPlayer1.URL = content.Content;
             videoContentPlayerForm.ShowDialog();
         }
 
@@ -234,6 +294,18 @@ namespace Binode.Presentation.WinForm
         private void sesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddFileContent("WAV | *.wav", IcerikTipi.Ses);
+        }
+
+        private void rdbtnKategori_CheckedChanged(object sender, EventArgs e)
+        {
+                RefreshListView();
+            
+        }
+
+        private void rdbtnTür_CheckedChanged(object sender, EventArgs e)
+        {
+            RefreshListView();
+
         }
     }
 }

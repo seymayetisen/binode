@@ -19,7 +19,7 @@ namespace Binode.Presentation.WinForm
 
         private void VideoContentPlayerForm_Load(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.URL = @"C:\Users\BEM\Downloads\SampleVideo_720x480_5mb.mp4";
+            //axWindowsMediaPlayer1.URL = @"C:\Users\BEM\Downloads\SampleVideo_720x480_5mb.mp4";
         }
     }
 }
