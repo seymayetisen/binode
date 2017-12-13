@@ -1,6 +1,8 @@
-﻿namespace Binode.Presentation.WinForm
+﻿using System;
+
+namespace Binode.Presentation.WinForm
 {
-    partial class Form1
+    partial class BinodeMainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -61,11 +63,14 @@
             // 
             // treeKategori
             // 
+            this.treeKategori.LabelEdit = true;
             this.treeKategori.Location = new System.Drawing.Point(6, 19);
             this.treeKategori.Name = "treeKategori";
             this.treeKategori.Size = new System.Drawing.Size(188, 405);
             this.treeKategori.TabIndex = 0;
+            this.treeKategori.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeKategori_AfterLabelEdit);
             this.treeKategori.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeKategori_AfterSelect);
+            this.treeKategori.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeKategori_NodeMouseClick);
             // 
             // grpIcerik
             // 
@@ -105,7 +110,7 @@
             this.toolStripMenuItem4,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(170, 114);
             this.contextMenuStrip1.Text = "Yeniden Adlandır";
             // 
             // toolStripMenuItem1
@@ -113,12 +118,14 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem1.Text = "Yeniden Adlandır";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem2.Text = "Alt Kategori Ekle...";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -143,21 +150,18 @@
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pdfToolStripMenuItem.Text = "Pdf";
-            this.pdfToolStripMenuItem.Click += new System.EventHandler(this.pdfToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
             this.videoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.videoToolStripMenuItem.Text = "Video";
-            this.videoToolStripMenuItem.Click += new System.EventHandler(this.videoToolStripMenuItem_Click);
             // 
             // sesToolStripMenuItem
             // 
             this.sesToolStripMenuItem.Name = "sesToolStripMenuItem";
             this.sesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sesToolStripMenuItem.Text = "Ses";
-            this.sesToolStripMenuItem.Click += new System.EventHandler(this.sesToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -165,14 +169,14 @@
             this.toolStripMenuItem3.Size = new System.Drawing.Size(169, 22);
             this.toolStripMenuItem3.Text = "Sil";
             // 
-            // Form1
+            // BinodeMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 454);
             this.Controls.Add(this.grpIcerik);
             this.Controls.Add(this.grpKategori);
-            this.Name = "Form1";
+            this.Name = "BinodeMain";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grpKategori.ResumeLayout(false);
@@ -182,9 +186,12 @@
 
         }
 
+       
+
         #endregion
 
         private System.Windows.Forms.GroupBox grpKategori;
+        private System.Windows.Forms.TreeView treeKategori;
         private System.Windows.Forms.GroupBox grpIcerik;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -198,7 +205,6 @@
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sesToolStripMenuItem;
-        public System.Windows.Forms.TreeView treeKategori;
     }
 }
 

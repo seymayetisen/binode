@@ -1,8 +1,10 @@
 ﻿using Binode.Data.Model;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,38 +13,38 @@ using System.Windows.Forms;
 
 namespace Binode.Presentation.WinForm
 {
-    public partial class Form1 : Form
+    public partial class BinodeMainForm : Form
     {
-        public Form1()
+        private TreeNode _rightClicknode;
+
+        public BinodeMainForm()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Form2 f2 = Application.OpenForms["Form2"] as Form2;
             var kategoriler = DemoData.DemoKategoriGetir();
-            kategoriler.Add(f2.al());
             KategoriyiTreeviewAEkle(kategoriler, null);
         }
 
-        public void KategoriyiTreeviewAEkle(List<Kategori> kategoriler, TreeNode node)
+        private void KategoriyiTreeviewAEkle(List<Kategori> kategoriler, TreeNode node)
         {
             foreach (var kategori in kategoriler)
             {
-                if(node == null)
+                if (node is null)
                 {
                     var nnode = new TreeNode(kategori.Isim);
                     nnode.ContextMenuStrip = contextMenuStrip1;
                     treeKategori.Nodes.Add(nnode);
                     nnode.Tag = kategori;
 
-                    if(kategori.AltKategori != null)
+                    if (kategori.AltKategori != null)
                     {
                         KategoriyiTreeviewAEkle(kategori.AltKategori, nnode);
                     }
@@ -55,7 +57,7 @@ namespace Binode.Presentation.WinForm
                     nnode.Tag = kategori;
                     if (kategori.AltKategori != null)
                     {
-                        KategoriyiTreeviewAEkle(kategori.AltKategori,nnode);
+                        KategoriyiTreeviewAEkle(kategori.AltKategori, nnode);
                     }
                 }
             }
@@ -65,16 +67,16 @@ namespace Binode.Presentation.WinForm
         private void treeKategori_AfterSelect(object sender, TreeViewEventArgs e)
         {
             listView1.Items.Clear();
-            //MessageBox.Show(e.Node);
+
             ListViewDoldur(e.Node);
         }
 
-        public void ListViewDoldur(TreeNode node)
+        private void ListViewDoldur(TreeNode node)
         {
             var kategori = node.Tag as Kategori;
 
             //Hatalı olabilir
-            if(kategori?.Icerik?.Count == null)
+            if (kategori?.Icerik?.Count == null)
             {
                 return;
             }
@@ -93,7 +95,7 @@ namespace Binode.Presentation.WinForm
 
             //listView1.Groups.Add(group);
 
-            if(node.Nodes != null)
+            if (node.Nodes != null)
             {
                 foreach (TreeNode subNode in node.Nodes)
                 {
@@ -102,29 +104,57 @@ namespace Binode.Presentation.WinForm
             }
         }
 
+        private void treeKategori_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                _rightClicknode = e.Node;
+            }
+
+            //e.Node.BeginEdit();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //Debug.WriteLine(_rightClicknode.Text);
+            _rightClicknode.BeginEdit();
+
+        }
+
+        private void treeKategori_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            e.Node.Text = e.Label;
+            var kategori = e.Node.Tag as Kategori;
+
+            kategori.Isim = e.Label;
+            listView1.Items.Clear();
+            ListViewDoldur(treeKategori.SelectedNode);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string kategoriAdi = Interaction.InputBox("Kategori adını giriniz.");
+            var anaKategori = _rightClicknode.Tag as Kategori;
+            var yeniKAtegori = new Kategori {
+                Isim = kategoriAdi,
+                UstKategori = anaKategori,
+                EklenmeTarihi = DateTime.Now ,
+                //AltKategori = new List<Kategori>()
+            };
+
+            anaKategori.AltKategori.Add(yeniKAtegori);
+            _rightClicknode.Nodes.Add(new TreeNode
+            {
+                Text = kategoriAdi,
+                Tag = yeniKAtegori,
+                ContextMenuStrip = contextMenuStrip1
+            });
+        }
+
         private void metinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2();
-            //this.Hide();
-            f2.Show();
-            TreeNode treeN = treeKategori.SelectedNode;
-            TreeNode t = treeKategori.SelectedNode;
-
-        }
-
-        private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void sesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            var textContentForm = new AddTextContentForm();
+            textContentForm.ShowDialog();
         }
     }
 }
