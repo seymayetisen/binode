@@ -185,5 +185,47 @@ namespace Binode.Presentation.WinForm
 
             RefreshListView();
         }
+
+        private void sesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "MP3 | *.mp3";
+            openFileDialog1.ShowDialog();
+
+            var category = _rightClicknode.Tag as Kategori;
+
+            var content = new Icerik
+            {
+                Isim = openFileDialog1.SafeFileName,
+                Content = openFileDialog1.FileName,
+                Tip = IcerikTipi.Ses,
+                EklenmeTarihi = DateTime.Now,
+                Kategori = category
+            };
+
+            category.Icerik.Add(content);
+
+            RefreshListView();
+        }
+
+        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "MP4 | *.mp4";
+            openFileDialog1.ShowDialog();
+
+            var category = _rightClicknode.Tag as Kategori;
+
+            var content = new Icerik
+            {
+                Isim = openFileDialog1.SafeFileName,
+                Content = openFileDialog1.FileName,
+                Tip = IcerikTipi.Video,
+                EklenmeTarihi = DateTime.Now,
+                Kategori = category
+            };
+
+            category.Icerik.Add(content);
+
+            RefreshListView();
+        }
     }
 }
