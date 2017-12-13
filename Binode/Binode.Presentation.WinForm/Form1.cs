@@ -25,7 +25,9 @@ namespace Binode.Presentation.WinForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Form2 f2 = Application.OpenForms["Form2"] as Form2;
             var kategoriler = DemoData.DemoKategoriGetir();
+            kategoriler.Add(f2.al());
             KategoriyiTreeviewAEkle(kategoriler, null);
         }
 

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Binode.Presentation.WinForm
 {
     public partial class Form2 : Form
@@ -17,8 +18,7 @@ namespace Binode.Presentation.WinForm
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        public Kategori al()
         {
             Form1 f1 = Application.OpenForms["Form1"] as Form1;
             string title = txtBaslik.Text;
@@ -36,52 +36,63 @@ namespace Binode.Presentation.WinForm
                     kategori.Icerik = new List<Icerik>
                     {
                         new Icerik { Isim= title, EklenmeTarihi = DateTime.Now, Kategori = kategori},
-                        
+
                     };
                     f1.ListViewDoldur(t);
-                    break;
+                    return kategori;
                 }
                 for (int i = 0; i < kategori.AltKategori.Count; i++)
                 {
-                    if (t.Text==kategori.AltKategori[i].Isim)
+                    if (t.Text == kategori.AltKategori[i].Isim)
                     {
                         kategori.AltKategori[i].Icerik = new List<Icerik>
                         {
                             new Icerik { Isim= title, EklenmeTarihi = DateTime.Now, Kategori = kategori.AltKategori[i]},
 
-                        
+
                         };
                         f1.ListViewDoldur(t);
-                        break;
+                        return kategori;
 
                     }
-                    if (kategori.AltKategori[i].AltKategori ==null)
+                    if (kategori.AltKategori[i].AltKategori == null)
                     {
-                        return;
+                        return kategori;
                     }
                     for (int j = 0; j < kategori.AltKategori[i].AltKategori.Count; j++)
                     {
-                        if (t.Text==kategori.AltKategori[i].AltKategori[j].Isim)
+                        if (t.Text == kategori.AltKategori[i].AltKategori[j].Isim)
                         {
                             kategori.AltKategori[i].AltKategori[j].Icerik = new List<Icerik>
                             {
                                 new Icerik { Isim= title, EklenmeTarihi = DateTime.Now, Kategori = kategori.AltKategori[i].AltKategori[j]},
 
-                        
+
                             };
                             f1.ListViewDoldur(t);
-                            break;
+                            return kategori;
+
 
                         }
                     }
 
                 }
-                
-                
+
+                return kategori;
             }
-           
+        }
+            private void button1_Click(object sender, EventArgs e)
+        {
+            Form1 f1 = Application.OpenForms["Form1"] as Form1;
+            Kategori k = new Kategori();
+            k=al();
             this.Hide();
             f1.Show();
+
         }
+        
+            
+            
+        
     }
 }
