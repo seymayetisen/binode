@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Binode.Data.Model")]
+[assembly: AssemblyTitle("Binode.Presentation.WinForm")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Binode.Data.Model")]
+[assembly: AssemblyProduct("Binode.Presentation.WinForm")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("07667ab4-7486-460f-900b-4524a35b55fa")]
+[assembly: Guid("d749f8a0-5f4a-4aac-9d64-8706a26c381c")]
 
 // Version information for an assembly consists of the following four values:
 //
