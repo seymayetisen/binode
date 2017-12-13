@@ -75,16 +75,40 @@ namespace Binode.Data.Model
 
             kategori[0].Icerik = new List<Icerik>
                     {
-                        new Icerik { Isim= "Coğrafya 01", EklenmeTarihi = DateTime.Now, Kategori = kategori[0]},
-                        new Icerik { Isim= "Coğrafya 02", EklenmeTarihi = DateTime.Now, Kategori = kategori[0]},
-                        new Icerik { Isim= "Coğrafya 03", EklenmeTarihi = DateTime.Now, Kategori = kategori[0]},
+                        new Icerik {
+                            Isim = "Coğrafya 01",
+                            EklenmeTarihi = DateTime.Now,
+                            Kategori = kategori[0]
+                        },
+                        new Icerik {
+                            Isim = "Coğrafya 02",
+                            EklenmeTarihi = DateTime.Now,
+                            Kategori = kategori[0]
+                        },
+                        new Icerik {
+                            Isim = "Coğrafya 03",
+                            EklenmeTarihi = DateTime.Now,
+                            Kategori = kategori[0]
+                        },
                     };
 
             kategori[0].AltKategori[0].Icerik = new List<Icerik>
                     {
-                        new Icerik { Isim= "Yerel Coğrafya 01", EklenmeTarihi = DateTime.Now, Kategori = kategori[0].AltKategori[0]},
-                        new Icerik { Isim= "Yerel Coğrafya 02", EklenmeTarihi = DateTime.Now, Kategori = kategori[0].AltKategori[0]},
-                        new Icerik { Isim= "Yerel Coğrafya 03", EklenmeTarihi = DateTime.Now, Kategori = kategori[0].AltKategori[0]},
+                        new Icerik {
+                            Isim = "Yerel Coğrafya 01",
+                            EklenmeTarihi = DateTime.Now,
+                            Kategori = kategori[0].AltKategori[0]
+                        },
+                        new Icerik {
+                            Isim = "Yerel Coğrafya 02",
+                            EklenmeTarihi = DateTime.Now,
+                            Kategori = kategori[0].AltKategori[0]
+                        },
+                        new Icerik {
+                            Isim = "Yerel Coğrafya 03",
+                            EklenmeTarihi = DateTime.Now,
+                            Kategori = kategori[0].AltKategori[0]
+                        },
                     };
 
             return kategori;
