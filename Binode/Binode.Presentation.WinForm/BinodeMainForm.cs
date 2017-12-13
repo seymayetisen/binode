@@ -15,7 +15,7 @@ namespace Binode.Presentation.WinForm
 {
     public partial class BinodeMainForm : Form
     {
-        public TreeNode _rightClicknode;
+        private TreeNode _rightClicknode;
 
         public BinodeMainForm()
         {
@@ -71,7 +71,7 @@ namespace Binode.Presentation.WinForm
             ListViewDoldur(e.Node);
         }
 
-        public void ListViewDoldur(TreeNode node)
+        private void ListViewDoldur(TreeNode node)
         {
             var kategori = node.Tag as Kategori;
 
@@ -90,6 +90,7 @@ namespace Binode.Presentation.WinForm
             {
                 var li = new ListViewItem(new[] { icerik.Isim, kategori.Isim });
                 li.Group = group;
+                li.ImageKey = icerik.Tip.ToString().ToLower();
                 listView1.Items.Add(li);
             }
 
@@ -127,6 +128,11 @@ namespace Binode.Presentation.WinForm
             var kategori = e.Node.Tag as Kategori;
 
             kategori.Isim = e.Label;
+            RefreshListView();
+        }
+
+        private void RefreshListView()
+        {
             listView1.Items.Clear();
             ListViewDoldur(treeKategori.SelectedNode);
         }
@@ -153,23 +159,31 @@ namespace Binode.Presentation.WinForm
 
         private void metinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTextContentForm textContentForm = new AddTextContentForm();
+            var textContentForm = new AddTextContentForm();
+            textContentForm.SelectedKategori = _rightClicknode.Tag as Kategori;
             textContentForm.ShowDialog();
-            
+            RefreshListView();
         }
 
         private void pdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "PDF | *.pdf";
             openFileDialog1.ShowDialog();
-            Icerik content = new Icerik {
 
+            var category = _rightClicknode.Tag as Kategori;
+
+            var content = new Icerik
+            {
+                Isim = openFileDialog1.SafeFileName,
+                Content = openFileDialog1.FileName,
+                Tip = IcerikTipi.Pdf,
+                EklenmeTarihi = DateTime.Now,
+                Kategori = category
             };
-        }
 
-        private void videoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+            category.Icerik.Add(content);
 
+            RefreshListView();
         }
     }
 }
