@@ -37,7 +37,7 @@ namespace Binode.Presentation.WinForm
         {
             foreach (var kategori in kategoriler)
             {
-                if (node is null)
+                if (node == null)
                 {
                     var nnode = new TreeNode(kategori.Isim);
                     nnode.ContextMenuStrip = contextMenuStrip1;
